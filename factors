@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+check_factor()
+{
+	if [ $# -ne 3 ];
+        then
+                arg=("$@")
+                counter=0
+                nummber2=1
+                for i in ${arg[*]};
+                do
+                        if [ $counter -gt 1 ];
+                        then
+                                number2=$(echo $a*$number2 | bc)
+                        fi
+                        counter=$((counter + 1))
+                done
+        else
+                number2=$3
+        fi
+
+        number1=$2
+        number=$(echo "$1" | tr ':' '=')
+
+        results=$(echo "if($num2 > $num1) 1 else 0" | bc)
+	        if ((results == 1)); then
+		        numcp=$number1
+		        number1=$number2
+		        number2=$numcp
+                fi
+
+        echo "$num$num1*$num2"
+}
+
+if [ $# -ne 1 ]
+then
+        echo 'Usage: factors <file>'
+        exit 1
+else
+
+        while read i
+        do
+
+                results=$(factor "$i")
+                check_factor $result
+
+        done < "$1"
+fi
